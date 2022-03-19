@@ -9,7 +9,7 @@
 
 .fipe-container,.wiki-container,.wolfram-container{
     border: white 1px solid;
-    height: 100px;
+    min-height: 100px;
     border-radius: 8px;
     width: 88%;
     margin-top: 16px;
