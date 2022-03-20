@@ -16,8 +16,15 @@ window.addEventListener("load",async() =>{
 
       select.innerHTML = ""
 
+      let lbOption = document.createElement('option')
+      lbOption.selected = true
+      lbOption.disabled = true
+    
+      lbOption.innerHTML = "Selecione um fabricante"
+      select.appendChild(lbOption)
+
       //define a click listenner
-      select.addEventListener('click',labelClick);
+      select.addEventListener('change',labelClick);
 
       labels.forEach(element => {
         var option = document.createElement("option");
@@ -33,6 +40,10 @@ window.addEventListener("load",async() =>{
 
 })
 
+
+
+
+
 async function labelClick(event)
 {
   MARCA_SELECIONADA = event.target.value.split("#")[0];
@@ -42,14 +53,35 @@ async function labelClick(event)
   const models = await fipe.getVeiculosDaMarca(MARCA_SELECIONADA)
 
 
-  //fill label select
+ 
   var selectModel = document.getElementById('select-modelos')
 
   //clear select
   selectModel.innerHTML = ""
 
+
+  var selectAno = document.getElementById('select-anos')
+
+  selectAno.innerHTML = ""
+
+
+  let Option = document.createElement('option')
+  Option.selected = true
+  Option.disabled = true
+
+  Option.innerHTML = "Selecione um Modelo"
+  selectModel.appendChild(Option)
+
+  let yOption = document.createElement('option')
+  yOption.selected = true
+  yOption.disabled = true
+
+  yOption.innerHTML = "Selecione um Ano"
+  selectAno.appendChild(yOption)
+
+
   //define a click listenner
-  selectModel.addEventListener('click',modelClick);
+  selectModel.addEventListener('change',modelClick);
 
   models.modelos.forEach(element => {
         var option = document.createElement("option");
@@ -71,11 +103,17 @@ async function modelClick(event)
   //fill years select
   var selectYears = document.getElementById('select-anos')
 
-  //clear select
   selectYears.innerHTML = ""
 
+  let nOption = document.createElement('option')
+  nOption.selected = true
+  nOption.disabled = true
+
+  nOption.innerHTML = "Selecione um ano"
+  selectYears.appendChild(nOption)
+
   //define a click listenner
-  selectYears.addEventListener('click',yearClick);
+  selectYears.addEventListener('change',yearClick);
 
   years.forEach(element => {
         var option = document.createElement("option");

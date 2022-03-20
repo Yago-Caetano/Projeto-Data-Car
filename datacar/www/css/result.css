@@ -13,4 +13,56 @@
     border-radius: 8px;
     width: 88%;
     margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    color: white;
+}
+
+table{
+    color: white;
+    margin-bottom: 4vw;
+    border-collapse:collapse;
+    border:1px solid white;
+}
+
+    
+table td{
+    border:1px solid white;
+    padding: 2vw;
+    }
+
+.wiki-item{
+    display: flex;
+    flex-direction: column;
+    border:1px solid #D81B60;
+    background-color: white;
+    min-width: 80%;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    color: #D81B60;
+    padding: 8px;
+
+}
+
+.wiki-item:hover{
+    background-color: #D81B60;
+    color: white;
+    border:1px solid white;
+
+}
+
+.wiki-item-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.wiki-item-header i{
+    margin-right: 8px;
 }

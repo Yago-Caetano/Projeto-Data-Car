@@ -44,19 +44,29 @@ body{
     height: 8vh;
 }
 
-.form-search button
+.form-search select
 {
-
     height: 8vh;
-    background-color: white;
     width: 80vw;
     font-size:large;
     color: #D81B60;
-    border: 3px solid white;
+    border: 3px solid #D81B60;
     border-radius: 16px;
     outline: none;
 }
 
-.form-search input,button{
+.form-search button
+{
+    height: 8vh;
+    width: 80vw;
+    font-size:large;
+    color: #D81B60;
+    border: 3px solid #D81B60;
+    border-radius: 16px;
+    background-color: white;
+    outline: none;
+}
+.form-search input,select,button{
     margin-top: 16px;
 }
+

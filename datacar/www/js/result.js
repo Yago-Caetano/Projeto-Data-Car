@@ -1,7 +1,15 @@
 import fipe from './api/fipe.js'
 import wikipedia from './api/WikipediaAPI.js'
+import wolfram from './api/wolframAPI.js'
 
 var MODELO = ""
+
+/*
+    Add click listenner to header logo
+*/
+document.getElementById("header-logo").addEventListener('click',()=>{
+    window.location.href = "home.html"
+})
 
 
 window.addEventListener('load',async ()=>{
@@ -15,38 +23,49 @@ window.addEventListener('load',async ()=>{
     var doc = ""    
 
     var fipeContainer = document.getElementsByClassName("fipe-container")[0]
-    var listAux = document.createElement("ul")
+    var tableAux = document.createElement("table")
 
     Object.entries(carro).map(objDetails=>{
+
+        let tableRow = document.createElement('tr')
 
         if(objDetails[0] === "Modelo")
         {
             MODELO += ` ${objDetails[1].split(" ")[0]}`
         }
 
-        let listItem = document.createElement('li')
 
         let bold = document.createElement('b')
         bold.innerHTML = `${objDetails[0]}: `
 
-        let p = document.createElement('p')
-        p.innerHTML = `${objDetails[1]}`
+        let td = document.createElement('td')
+        td.appendChild(bold)
 
-        listItem.appendChild(bold)
-        listItem.appendChild(p)
+        tableRow.appendChild(td)
 
-        listAux.appendChild(listItem)
+
+        let td2 = document.createElement('td')
+        td2.innerHTML = `${objDetails[1]}`
+
+        tableRow.appendChild(td2)
+        
+
+        /*listItem.appendChild(bold)
+        listItem.appendChild(p)*/
+
+        tableAux.appendChild(tableRow)
 
 
         })
 
-    fipeContainer.appendChild(listAux)
+    fipeContainer.appendChild(tableAux)
 
     //get wikipedia data
     fillWikiPediaContainer(await getWikipediaData());
     
-
+    getWolframData()
 })
+
 
 
 window.addEventListener('close',() =>{
@@ -76,15 +95,28 @@ function fillWikiPediaContainer(data)
     if(jData.query.search.length>0)
     {
         jData.query.search.forEach(element => {
+
             let div = document.createElement("div")
+            div.className = "wiki-item"
+
+            let divHeader = document.createElement('div')
+            divHeader.className = "wiki-item-header"
+
+            let wikiIcon = document.createElement('i')
+            wikiIcon.className = "fa fa-brands fa-wikipedia-w"
+
             let h3 = document.createElement("h3")
+
             let a = document.createElement('a')
 
             h3.innerHTML=element.title
             a.href = `https://pt.wikipedia.org/wiki/${element.title.replace(" ","_")}`
-            a.innerHTML = "Link"
+            a.innerHTML = "Link do artigo"
 
-            div.appendChild(h3)
+            divHeader.appendChild(wikiIcon)
+            divHeader.appendChild(h3)
+
+            div.appendChild(divHeader)
             div.appendChild(a)
             container.appendChild(div)
         });
@@ -93,8 +125,20 @@ function fillWikiPediaContainer(data)
     }
     else
     {
+        let div = document.createElement("div")
+        div.className = "wiki-item"
+
         let p = document.createElement('p')
         p.innerHTML = ":( Infelizmente não encontramos resultados"
-        container.appendChild(p)
+
+        div.appendChild(p)
+        container.appendChild(div)
     }
+}
+
+
+async function getWolframData()
+{
+    const wolframResp = await wolfram.executeQuery(MODELO)
+    console.log(wolframResp)
 }
