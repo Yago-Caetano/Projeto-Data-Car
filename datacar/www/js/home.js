@@ -2,6 +2,7 @@ import fipe from './api/fipe.js'
 
 
 var MARCA_SELECIONADA = undefined
+var NOME_MARCA_SELECIONADA = undefined
 var CARRO_SELECIONADO = undefined
 var ANO_SELECIONADO = undefined
 
@@ -20,7 +21,7 @@ window.addEventListener("load",async() =>{
 
       labels.forEach(element => {
         var option = document.createElement("option");
-        option.value = element.codigo
+        option.value = `${element.codigo}#${element.nome}`
         option.innerHTML = element.nome
         select.appendChild(option)
       });
@@ -34,7 +35,8 @@ window.addEventListener("load",async() =>{
 
 async function labelClick(event)
 {
-  MARCA_SELECIONADA = event.target.value;
+  MARCA_SELECIONADA = event.target.value.split("#")[0];
+  NOME_MARCA_SELECIONADA = event.target.value.split("#")[1]
 
   //take veichles from label
   const models = await fipe.getVeiculosDaMarca(MARCA_SELECIONADA)
@@ -97,6 +99,7 @@ document.getElementById("bt-search").addEventListener("click", function( event )
       
       window.localStorage.clear();
       window.localStorage.setItem("marca",MARCA_SELECIONADA);
+      window.localStorage.setItem("marcaNome",NOME_MARCA_SELECIONADA)
       window.localStorage.setItem("carro",CARRO_SELECIONADO);
       window.localStorage.setItem("ano",ANO_SELECIONADO);
 

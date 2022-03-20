@@ -1,12 +1,12 @@
 import fipe from './api/fipe.js'
+import wikipedia from './api/WikipediaAPI.js'
+
+var MODELO = ""
 
 
 window.addEventListener('load',async ()=>{
 
-    console.log("Dados recuperados:")
-    console.log(`Marca: ${window.localStorage.getItem("marca")}`)
-    console.log(`Carro: ${window.localStorage.getItem("carro")}`)
-    console.log(`Ano: ${window.localStorage.getItem("ano")}`)
+    MODELO = window.localStorage.getItem("marcaNome")
 
     const carro = await fipe.getVeiculoFromId(window.localStorage.getItem("carro"),
                             window.localStorage.getItem("ano"),
@@ -18,6 +18,11 @@ window.addEventListener('load',async ()=>{
     var listAux = document.createElement("ul")
 
     Object.entries(carro).map(objDetails=>{
+
+        if(objDetails[0] === "Modelo")
+        {
+            MODELO += ` ${objDetails[1].split(" ")[0]}`
+        }
 
         let listItem = document.createElement('li')
 
@@ -32,11 +37,14 @@ window.addEventListener('load',async ()=>{
 
         listAux.appendChild(listItem)
 
+
         })
 
     fipeContainer.appendChild(listAux)
 
-
+    //get wikipedia data
+    fillWikiPediaContainer(await getWikipediaData());
+    
 
 })
 
@@ -44,3 +52,49 @@ window.addEventListener('load',async ()=>{
 window.addEventListener('close',() =>{
     window.localStorage.clear()
 })
+
+
+async function getWikipediaData()
+{
+    if(MODELO.length === 0)
+    {
+        //lançar excessão
+        alert("Erro ao ler dados do wikipedia")
+        return;
+    }
+   const wikiSearch = await wikipedia.searchWikipediaArticles(MODELO);
+   return wikiSearch
+}
+
+
+function fillWikiPediaContainer(data)
+{
+
+    let jData = JSON.parse(data)
+    let container = document.getElementsByClassName("wiki-container")[0]
+
+    if(jData.query.search.length>0)
+    {
+        jData.query.search.forEach(element => {
+            let div = document.createElement("div")
+            let h3 = document.createElement("h3")
+            let a = document.createElement('a')
+
+            h3.innerHTML=element.title
+            a.href = `https://pt.wikipedia.org/wiki/${element.title.replace(" ","_")}`
+            a.innerHTML = "Link"
+
+            div.appendChild(h3)
+            div.appendChild(a)
+            container.appendChild(div)
+        });
+
+        
+    }
+    else
+    {
+        let p = document.createElement('p')
+        p.innerHTML = ":( Infelizmente não encontramos resultados"
+        container.appendChild(p)
+    }
+}
