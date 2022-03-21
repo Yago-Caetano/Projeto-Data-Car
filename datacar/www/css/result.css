@@ -7,7 +7,7 @@
     width: 100vw;
 }
 
-.fipe-container,.wiki-container,.wolfram-container{
+.fipe-container,.wiki-container,.wolfram-container,.img-container{
     border: white 1px solid;
     min-height: 100px;
     border-radius: 8px;

@@ -1,6 +1,8 @@
 import fipe from './api/fipe.js'
 import wikipedia from './api/WikipediaAPI.js'
 import wolfram from './api/wolframAPI.js'
+import gImage from './api/googleImage.js'
+
 
 var MODELO = ""
 
@@ -15,6 +17,8 @@ document.getElementById("header-logo").addEventListener('click',()=>{
 window.addEventListener('load',async ()=>{
 
     MODELO = window.localStorage.getItem("marcaNome")
+
+
 
     const carro = await fipe.getVeiculoFromId(window.localStorage.getItem("carro"),
                             window.localStorage.getItem("ano"),
@@ -63,7 +67,17 @@ window.addEventListener('load',async ()=>{
     //get wikipedia data
     fillWikiPediaContainer(await getWikipediaData());
     
-    getWolframData()
+    //load image
+    const gReturn = await gImage.searchGoogleImage(MODELO + " Foto")
+
+    let imgCotainer = document.getElementsByClassName("img-container")[0]
+    
+    let img = document.createElement('img')
+    img.src = gReturn.items[0].pagemap.cse_image[0].src
+    
+    imgCotainer.appendChild(img)
+    
+
 })
 
 
