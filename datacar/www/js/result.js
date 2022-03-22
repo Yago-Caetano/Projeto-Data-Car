@@ -15,6 +15,8 @@ document.getElementById("header-logo").addEventListener('click',()=>{
 
 window.addEventListener('load',async ()=>{
 
+    showLoading()
+
     MODELO = window.localStorage.getItem("marcaNome")
 
 
@@ -76,6 +78,7 @@ window.addEventListener('load',async ()=>{
     
     imgCotainer.appendChild(img)
     
+    hideLoading()
 
 })
 
@@ -154,4 +157,17 @@ async function getWolframData()
 {
     const wolframResp = await wolfram.executeQuery(MODELO)
     console.log(wolframResp)
+}
+
+
+function showLoading()
+{
+    document.getElementById("loading").style.display = 'flex'
+    document.getElementsByClassName("result-container")[0].style.display = 'none'
+
+}
+
+function hideLoading(){
+  document.getElementById("loading").style.display = 'none'
+  document.getElementsByClassName("result-container")[0].style.display = 'flex'
 }

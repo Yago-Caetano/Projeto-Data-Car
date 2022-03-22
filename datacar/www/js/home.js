@@ -8,6 +8,7 @@ var ANO_SELECIONADO = undefined
 
 window.addEventListener("load",async() =>{
   try{
+      showLoading()
       const labels = await fipe.getMarcas()
 
 
@@ -36,7 +37,7 @@ window.addEventListener("load",async() =>{
   catch{
 
   }
-
+  hideLoading()
 
 })
 
@@ -49,9 +50,9 @@ async function labelClick(event)
   MARCA_SELECIONADA = event.target.value.split("#")[0];
   NOME_MARCA_SELECIONADA = event.target.value.split("#")[1]
 
+  showLoading()
   //take veichles from label
   const models = await fipe.getVeiculosDaMarca(MARCA_SELECIONADA)
-
 
  
   var selectModel = document.getElementById('select-modelos')
@@ -90,12 +91,29 @@ async function labelClick(event)
         selectModel.appendChild(option)
       });
 
+  hideLoading()
+
+
 }
+
+function showLoading()
+{
+    document.getElementById("loading").style.display = 'flex'
+    document.getElementsByClassName("container")[0].style.display = 'none'
+
+}
+
+function hideLoading(){
+  document.getElementById("loading").style.display = 'none'
+  document.getElementsByClassName("container")[0].style.display = 'flex'
+}
+
 
 async function modelClick(event)
 {
   CARRO_SELECIONADO = event.target.value
 
+  showLoading()
   const years = await fipe.getYearsFromCarId(MARCA_SELECIONADA,CARRO_SELECIONADO)
 
   console.log(years)
@@ -122,6 +140,7 @@ async function modelClick(event)
         selectYears.appendChild(option)
       });
 
+      hideLoading()
 
 }
 
