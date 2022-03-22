@@ -1,6 +1,5 @@
 import fipe from './api/fipe.js'
 import wikipedia from './api/WikipediaAPI.js'
-import wolfram from './api/wolframAPI.js'
 import gImage from './api/googleImage.js'
 
 
