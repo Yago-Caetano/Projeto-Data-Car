@@ -37,7 +37,7 @@ Digite o seguinte comando no terminal apontado para a pasta do projeto
 
 ### Entregas 💪😎
 
-- [APK](https://youtu.be/LIOv_CFsBhI)
+- [APK](https://1drv.ms/u/s!AtzIvjLIXKud-mFlDaPgBqHfYam1?e=lKQbNl)
 
 
 
