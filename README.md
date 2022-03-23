@@ -43,7 +43,7 @@ Digite o seguinte comando no terminal apontado para a pasta do projeto
 
 
 
-💻 ## Desenvolvedores
+### 💻Desenvolvedores
 
 <table>
     <tr>
