@@ -39,6 +39,8 @@ Digite o seguinte comando no terminal apontado para a pasta do projeto
 
 - [APK](https://1drv.ms/u/s!AtzIvjLIXKud-mFlDaPgBqHfYam1?e=lKQbNl)
 
+- [Apresentação Power Point](https://1drv.ms/p/s!AtzIvjLIXKud-l4ZstvkXjgpeNvu?e=DO4NW6)
+
 
 
 💻 ## Desenvolvedores
